@@ -1,0 +1,14 @@
+order book heatmap ++
+market list++
+likidasyonlar
+death cross golden cross++
+mock trade (alıştırma trade'i)
+
+long short ratio
+open interest
+
+yapılamayanlar
+token unlock = maliyet
+exchange info = maliyet
+transferler = maliyet
+alıcı satıcı baskınlığı = kod hata

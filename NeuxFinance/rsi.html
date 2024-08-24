@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neux Finance</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Neux Finance</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav justify-content-end" id="prices">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.binance.com/tr/price/bitcoin">BTC: <span
+                            id="bitcoinPrice"></span> USDT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.binance.com/tr/price/ethereum">ETH: <span
+                            id="ethereumPrice"></span> USDT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.binance.com/tr/price/bnb">BNB: <span id="bnbPrice"></span>
+                        USDT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="reklam-alani">
+                    <img src="img/ads.jpg" alt="Reklam" style="width: 100%; height: 100px; margin-top: 2%;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center" style="margin-top: 5%;">
+        <div class="row align-items-start">
+            <div class="col">
+                <div id="binanceData" class="">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center" style="margin-top: 1%;">
+        <div class="row align-items-start">
+            <div class="col">
+                <div id="binanceData" class="">
+                    <canvas id="rsiChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center" style="margin-top: 5%;">
+        <div class="row align-items-start">
+          <div class="col">
+            <h4 style="text-align: start; color: white;"> Usage</h4>
+            <p style="text-align: start; color: white;">Now we come to the most critical point of the job, namely "How to interpret RSI?" Let's start with the simplest interpretation first.
+
+                As it is known, RSI oscillates between 0 and 100, and an RSI that cuts the value of 30 from bottom to top is interpreted as prices may start to rise;
+                
+                An RSI that cuts 70 from top to bottom is interpreted as prices may start to fall.</p>
+          </div>
+        </div>
+      </div>
+
+
+    <script src="js/modules/rsi.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

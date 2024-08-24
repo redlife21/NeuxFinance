@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neux Finance</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Neux Finance</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#pricing">Pricing</a>
+          </li>
+        </ul>
+      </div>
+      <ul class="navbar-nav justify-content-end" id="prices">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/bitcoin">BTC: <span id="bitcoinPrice"></span>
+            USDT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/ethereum">ETH: <span id="ethereumPrice"></span>
+            USDT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/bnb">BNB: <span id="bnbPrice"></span> USDT</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="reklam-alani">
+                <img src="img/ads.jpg" alt="Reklam" style="width: 100%; height: 100px; margin-top: 2%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div style="width: 500px; margin-left: 650px;">
+    <div class="form-floating">
+      <select class="form-select" id="fromCurrency" aria-label="Floating label select example">
+
+      </select>
+      <label for="fromCurrency">Select Pair "FROM"</label>
+    </div>
+    <div class="input-group mb-3" style="margin-top: 10px;">
+      <span class="input-group-text">Qty.</span>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="amount" placeholder="Miktarı girin">
+        <label for="amount"></label>
+      </div>
+    </div>
+
+    <div class="form-floating" style="margin-top: 50px;">
+      <select class="form-select" id="toCurrency" aria-label="Floating label select example">
+
+      </select>
+      <label for="toCurrency">Select Pair "TO"</label>
+    </div>
+    <div class="input-group mb-3" style="margin-top: 10px;">
+      <span class="input-group-text">Qty.</span>
+      <div class="form-floating">
+        <input type="number" class="form-control" id="amount2" placeholder="Miktarı girin" readonly>
+        <label for="amount2"></label>
+      </div>
+    </div>
+
+    <div style="margin-left: 200px; margin-top: 30px;">
+      <button class="btn btn-secondary" onclick="convert()">Dönüştür</button>
+    </div>
+  </div>
+
+  <div id="result"></div>
+
+  <script src="js/modules/convert.js">
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

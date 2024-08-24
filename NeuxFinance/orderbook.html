@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neux Finance</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .table-container {
+      display: flex;
+      flex-direction: row;
+      color: white;
+    }
+
+    .table-container table {
+      margin-right: 20px;
+      color: white;
+    }
+    .table-container table, 
+  .table-container th, 
+  .table-container td {
+    border: 1px solid white;
+  }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Neux Finance</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#pricing">Pricing</a>
+          </li>
+        </ul>
+      </div>
+      <ul class="navbar-nav justify-content-end" id="prices">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/bitcoin">BTC: <span id="bitcoinPrice"></span>
+            USDT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/ethereum">ETH: <span id="ethereumPrice"></span>
+            USDT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.binance.com/tr/price/bnb">BNB: <span id="bnbPrice"></span> USDT</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="table-container">
+      <div>
+        <h2>En Çok Alıcılar</h2>
+        <table id="top_buys_table" border="1">
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <h2>En Çok Satıcılar</h2>
+        <table id="top_sells_table" border="1">
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div>
+        <h4>Alıcılar</h4>
+        <table id="bids_table" border="1">
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <h4>Satıcılar</h4>
+        <table id="asks_table" border="1">
+          <tr>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getOrderBook() {
+      $.ajax({
+        url: "https://api.binance.com/api/v3/depth",
+        method: "GET",
+        data: {
+          symbol: "BTCUSDT",
+          limit: 150
+        },
+        success: function (response) {
+          updateTable("bids_table", response.bids);
+          updateTable("asks_table", response.asks);
+
+          updateTopBuyersAndSellers(response, 3);
+        }
+      });
+    }
+
+    function updateTable(tableId, data) {
+      var table = document.getElementById(tableId);
+      while (table.rows.length > 1) {
+        table.deleteRow(-1);
+      }
+      for (var i = 0; i < data.length; i++) {
+        var row = table.insertRow(-1);
+        var priceCell = row.insertCell(0);
+        var quantityCell = row.insertCell(1);
+        priceCell.innerHTML = data[i][0];
+        quantityCell.innerHTML = data[i][1];
+      }
+    }
+
+    function findMaxQuantities(data, limit) {
+      let maxQuantities = [];
+
+      for (let i = 0; i < data.length; i++) {
+        let quantity = parseFloat(data[i][1]);
+        maxQuantities.push({ index: i, quantity: quantity });
+      }
+
+      maxQuantities.sort((a, b) => b.quantity - a.quantity);
+
+      maxQuantities = maxQuantities.slice(0, limit);
+
+      return maxQuantities;
+    }
+
+    function updateTopBuyersAndSellers(data, limit) {
+      let maxBuyers = findMaxQuantities(data.bids, limit);
+      let maxSellers = findMaxQuantities(data.asks, limit);
+
+      var topBuyersTable = document.getElementById("top_buys_table");
+      topBuyersTable.innerHTML = "";
+      for (let i = 0; i < maxBuyers.length; i++) {
+        var row = topBuyersTable.insertRow(-1);
+        var priceCell = row.insertCell(0);
+        var quantityCell = row.insertCell(1);
+        priceCell.innerHTML = data.bids[maxBuyers[i].index][0];
+        quantityCell.innerHTML = data.bids[maxBuyers[i].index][1];
+      }
+
+      var topSellersTable = document.getElementById("top_sells_table");
+      topSellersTable.innerHTML = "";
+      for (let i = 0; i < maxSellers.length; i++) {
+        var row = topSellersTable.insertRow(-1);
+        var priceCell = row.insertCell(0);
+        var quantityCell = row.insertCell(1);
+        priceCell.innerHTML = data.asks[maxSellers[i].index][0];
+        quantityCell.innerHTML = data.asks[maxSellers[i].index][1];
+      }
+    }
+    getOrderBook();
+
+    setInterval(getOrderBook, 5000);
+  </script>
+
+
+  <script src="js/main.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
