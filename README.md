@@ -14,7 +14,7 @@ Features:<br>
 
 <h2>Images:</h2><br>
 <h4>Navbar:</h4><br>
-![image](https://github.com/user-attachments/assets/18a5823c-6c22-48b1-800e-c7cd9469b610) <br>
+<br> ![image](https://github.com/user-attachments/assets/18a5823c-6c22-48b1-800e-c7cd9469b610) 
 <h4>Features list:</h4><br>
 ![image](https://github.com/user-attachments/assets/e59c47c2-e909-47ee-b74b-b950e99aea54) <br>
 <h4>Markets:</h4><br>
